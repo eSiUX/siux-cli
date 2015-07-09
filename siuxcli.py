@@ -134,8 +134,19 @@ for p in sys.argv[1:-1]:
 	
 	params[ pName ] = pVal
 
-siuxClient = siuxlib.SiUXclient( auth=params['client'] )
+# auth string
+auth = params.get( 'client', '' )
+if not auth:
+	print "Error:"
+	print
+	print 'Parametr "client" must be input'
+	print
+	sys.exit(1)
 
+# client init
+siuxClient = siuxlib.SiUXclient( auth=auth )
+
+# method call
 methodTest = getattr( siuxClient, methodName )
 ret = methodTest( **params )
 
