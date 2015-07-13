@@ -5,7 +5,7 @@
 # SiUX command line client
 # 
 
-import sys, pprint
+import sys, pprint, os, ConfigParser
 sys.path.append( '../siux-python/src/' )
 
 from siuxmethodlib import methodArgs
@@ -134,14 +134,35 @@ for p in sys.argv[1:-1]:
 	
 	params[ pName ] = pVal
 
+configFilename = 'siux.conf'
+if os.environ.get( 'SIUX_CONFIG_FILE' ):
+	configFilename = os.environ['SIUX_CONFIG_FILE']
+
+if not os.path.isfile( configFilename ):
+	configFilename = None
+
+configAuth = None
+if configFilename:
+	cfg = ConfigParser.ConfigParser()
+	cfg.read( configFilename )
+	
+	configAuth = cfg.get( 'client', 'auth' )
+	if configAuth == '<YOUR_API_KEY>':
+		configAuth = None
+
 # auth string
 auth = params.get( 'client', '' )
 if not auth:
-	print "Error:"
-	print
-	print 'Parametr "client" must be input'
-	print
-	sys.exit(1)
+	
+	if not configAuth:
+		print "Error:"
+		print
+		print 'Parametr "client" must be input'
+		print
+		sys.exit(1)
+	else:
+		auth = configAuth
+		params[ 'client' ] = configAuth
 
 # client init
 siuxClient = siuxlib.SiUXclient( auth=auth )
