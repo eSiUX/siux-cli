@@ -2,6 +2,17 @@
 
 Command line interface to the SiUX
 
-# ./siuxcli.py --client='YOUR_API_KEY' countryList
+Help:
 
-# ./siuxcli.py --client='YOUR_API_KEY' sourceList
+`# ./siuxcli.py help`
+
+
+Example for country list:
+
+`# ./siuxcli.py --client='YOUR_API_KEY' countryList`
+
+
+Example for source list:
+
+`# ./siuxcli.py --client='YOUR_API_KEY' sourceList`
+
