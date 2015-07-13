@@ -2,6 +2,12 @@
 
 Command line interface to the SiUX
 
+
+Edit your API key:
+
+`# vim siux.conf`
+
+
 Help:
 
 `# ./siuxcli.py help`
@@ -9,10 +15,10 @@ Help:
 
 Example for country list:
 
-`# ./siuxcli.py --client='YOUR_API_KEY' countryList`
+`# ./siuxcli.py countryList`
 
 
 Example for source list:
 
-`# ./siuxcli.py --client='YOUR_API_KEY' sourceList`
+`# ./siuxcli.py sourceList`
 
