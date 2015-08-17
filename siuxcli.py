@@ -14,7 +14,6 @@ import siuxlib
 print 
 print "SiUX command line client"
 print
-print
 
 
 
@@ -48,6 +47,9 @@ if sys.argv[1] == 'help':
 
 		__paramSort = methodArgs[methodName]['params'].keys()
 		__paramSort.sort()
+
+		if __paramSort[0] == 'client':
+			__paramSort = __paramSort[1:]
 
 		for p in __paramSort:
 
@@ -84,12 +86,9 @@ methodName = sys.argv[-1]
 # method not found
 if methodName not in methodArgs:
 	print "Error:"
-	print
-	print 'Method "%s" not exist' % (methodName,)
-	print
+	print '- Method "%s" not exist' % (methodName,)
 	print
 	print 'Use:'
-	print
 	print './siuxcli.py help'
 	print
 	sys.exit(1)
@@ -112,11 +111,9 @@ for p in sys.argv[1:-1]:
 	# param name
 	if pName not in methodArg['params']:
 		print "Error:"
-		print 
-		print 'Parametr "%s" for method "%s" not exist' % (pName, methodName)
+		print '- Parametr "%s" for method "%s" not exist' % (pName, methodName)
 		print 
 		print 'Use:'
-		print
 		print './siuxcli.py help'
 		print
 		sys.exit(1)
@@ -141,28 +138,20 @@ if os.environ.get( 'SIUX_CONFIG_FILE' ):
 if not os.path.isfile( configFilename ):
 	configFilename = None
 
-configAuth = None
+auth = None
 if configFilename:
 	cfg = ConfigParser.ConfigParser()
 	cfg.read( configFilename )
 	
-	configAuth = cfg.get( 'client', 'auth' )
-	if configAuth == '<YOUR_API_KEY>':
-		configAuth = None
+	auth = cfg.get( 'client', 'auth' )
+	if auth == '<YOUR_API_KEY>':
+		auth = None
 
-# auth string
-auth = params.get( 'client', '' )
 if not auth:
-	
-	if not configAuth:
-		print "Error:"
-		print
-		print 'Parametr "client" must be input'
-		print
-		sys.exit(1)
-	else:
-		auth = configAuth
-		params[ 'client' ] = configAuth
+	print "Error:"
+	print '- Auth must be input in siux.conf'
+	print
+	sys.exit(1)
 
 # client init
 siuxClient = siuxlib.SiUXclient( auth=auth )
