@@ -1,4 +1,4 @@
-# siux-cli
+# siux-cli [![Build status](https://api.travis-ci.org/eSiUX/siux-cli.svg?branch=master)](https://travis-ci.org/eSiUX/siux-cli)
 
 Command line interface to the SiUX
 
