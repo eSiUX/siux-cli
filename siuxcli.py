@@ -6,7 +6,7 @@
 # 
 
 import sys, pprint, os, ConfigParser
-sys.path.append( '../siux-python/src/' )
+sys.path.append( '../siux-python/siux/' )
 
 from siuxmethodlib import methodArgs
 import siuxlib
