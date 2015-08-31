@@ -2,6 +2,10 @@
 
 Command line interface to the SiUX
 
+Install siux library for python:
+
+`# pip install -U siux`
+
 
 Edit your API key:
 
